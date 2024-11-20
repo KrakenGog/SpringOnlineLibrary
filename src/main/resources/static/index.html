@@ -13,6 +13,44 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+    <h1>Поиск литературы</h1>
+    <form action="/SearchBooks" method="GET">
+        <input type="text" name="query" placeholder="Введите название книги" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <div id="results">
+
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        const resultsDiv = document.getElementById('results')
+        form.addEventListener('submit', async(event) =>{
+            event.preventDefault();
+
+            const query = document.querySelector('input[name="query"]').value;
+            const response = await fetch(`/searchBooks?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            resultsDiv.innerHTML = '';
+
+            if(data.length>0){
+                data.forEach(book => {
+                    const bookDiv = document.createElement('div');
+                    bookDiv.className = 'book';
+                    bookDiv.innerHTML = `<h2>Книга: ${book.name} </h2><p>Автор: Народное творчество</p>`;
+                    resultsDiv.appendChild(bookDiv);
+                });
+            }
+            else{
+                resultsDiv.innerHTML = '<p>Ничего не удалось найти  &#128532; . Проверьте правильность запроса.</p>';
+            }
+
+        });
+    </script>
+
+
+
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->

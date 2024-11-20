@@ -24,7 +24,8 @@ public class CoreApplication {
 			repo.save(new Book("Horsman Java"));	
 			repo.save(new Book("A piece of peace"));	
 			repo.save(new Book("Why c++ is better then Java"));
-
+			repo.save(new Book("Nigger encyclopedia"));
+			repo.save(new Book("Knigga"));
 		};
 	}
 
