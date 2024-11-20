@@ -18,7 +18,7 @@ public class BookController {
     @Autowired
     private SearchingService searchingService;
 
-    @GetMapping("/seachBooks")
+    @GetMapping("/searchBooks")
     public List<Book> searchBooks(@RequestParam String query) {
         return searchingService.SearchBooks(new SimpleStringSearcher(), query);
     }
