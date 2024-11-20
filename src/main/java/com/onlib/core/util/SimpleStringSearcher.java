@@ -13,7 +13,7 @@ public class SimpleStringSearcher extends StringSearcher {
          
         for(var item : list){
             String s =  getString.apply(item);
-            if(s.contains(query))
+            if(s.toLowerCase().contains(query.toLowerCase()))
                 result.add(item);
         }
 
