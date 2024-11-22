@@ -1,5 +1,7 @@
 package com.onlib.core;
 
+import java.util.Arrays;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,12 +22,13 @@ public class CoreApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(BookRepository repo){
 		return args -> {
-			repo.save(new Book("Matan"));	
-			repo.save(new Book("Horsman Java"));	
-			repo.save(new Book("A piece of peace"));	
-			repo.save(new Book("Why c++ is better then Java"));
-			repo.save(new Book("Nigger encyclopedia"));
-			repo.save(new Book("Knigga"));
+			repo.save(new Book("Слово пацана", new String[]{"Роберт Гараев"}, "slova.epub"));
+			repo.save(new Book("После бури", new String[]{"Фредрик Бакман"}, "posle.epub"));	
+			repo.save(new Book("Убийства во Флит-Хаусе", new String[]{"Люсинда Райли"}, "kill.epub"));	
+			repo.save(new Book("Путешествие в Элевсин", new String[]{"Виктор Пелевин"}, "travel.epub"));	
+
+			
+			
 		};
 	}
 

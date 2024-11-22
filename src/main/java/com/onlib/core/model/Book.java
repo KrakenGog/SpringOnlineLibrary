@@ -16,6 +16,17 @@ public class Book {
     private Long id;
 
     private String name;
+    private String[] authors;
+
+    private String epubFileName;
+
+
+
+    public Book(String name, String[] authors, String epubFileName) {
+        this.name = name;
+        this.authors = authors;
+        this.epubFileName = epubFileName;
+    }
 
     public Book(){}
 
