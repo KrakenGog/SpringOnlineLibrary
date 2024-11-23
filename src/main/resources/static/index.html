@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrakenLib</title>
+    <style>
+        /* Ваши существующие стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        .header .title {
+            font-size: 24px;
+        }
+
+        .header .menu {
+            display: flex;
+        }
+
+        .header .menu>div {
+            margin: 0 15px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .menu>div:hover .dropdown {
+            display: block;
+        }
+
+        .header .menu>div .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        .header .menu>div .dropdown a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .header .login {
+            background-color: #555;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 4px;
+        }
+
+        .results {
+            margin: 20px;
+        }
+
+        .book-block {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .book-block:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .reader {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    
+</head>
+
+<body>
+    
+    <div class="header">
+        <div class="title">KrakenLib</div>
+        <div class="menu">
+            <div>FAQ
+                <div class="dropdown">
+                    <a href="#">Section 1</a>
+                    <a href="#">Section 2</a>
+                </div>
+            </div>
+            <div>License
+                <div class="dropdown">
+                    <a href="#">Section 1</a>
+                    <a href="#">Section 2</a>
+                </div>
+            </div>
+            <div>History
+                <div class="dropdown">
+                    <a href="#">Section 1</a>
+                    <a href="#">Section 2</a>
+                </div>
+            </div>
+            <div>My library
+                <div class="dropdown">
+                    <a href="#">Section 1</a>
+                    <a href="#">Section 2</a>
+                </div>
+            </div>
+        </div>
+        <button class="login">Log In</button>
+    </div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for books..." value="">
+        <button id="searchButton">🔍</button>
+    </div>
+    <div class="results" id="results"></div>
+
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="bookTitle"></h2>
+            <p id="bookAuthors"></p>
+            <button id="readButton">Читать</button>
+        </div>
+    </div>
+
+    <!-- Интерфейс для чтения EPUB -->
+    <div id="readerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-reader">&times;</span>
+            <div id="reader" class="reader"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="./js/epub.min.js"></script>
+    <script src="./js/main.js"></script>
+
+   
+</body>
+
+</html>
