@@ -1,0 +1,48 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    height: 50vh;
+    margin: 0;
+}
+.book {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    white-space: nowrap; /* Запрещает перенос текста на новую строку */
+    text-overflow: ellipsis; /*многоточие если текст не влез*/
+    overflow: hidden;
+    padding: 0 10px;
+    border-radius: 5px;
+    max-height: 30px;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar{
+
+    padding: 0;
+    margin: 0;
+    background-color: deepskyblue;
+    position:sticky;
+    top: -30%;/*кто уберет этот дурацкий отступ тот лучший*/
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar a{
+    float: left;
+    display: block;
+    color: white;
+    padding: 14px 20px;
+    margin: 0;
+}

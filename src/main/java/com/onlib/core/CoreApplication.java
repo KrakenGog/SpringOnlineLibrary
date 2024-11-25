@@ -26,7 +26,7 @@ public class CoreApplication {
 			repo.save(new Book("После бури", new String[]{"Фредрик Бакман"}, "posle.epub"));	
 			repo.save(new Book("Убийства во Флит-Хаусе", new String[]{"Люсинда Райли"}, "kill.epub"));	
 			repo.save(new Book("Путешествие в Элевсин", new String[]{"Виктор Пелевин"}, "travel.epub"));	
-
+			repo.save(new Book("Knigga",new String[]{"Knigger","Nikolas Kowalski"},"knigga.epub"));
 			
 			
 		};
