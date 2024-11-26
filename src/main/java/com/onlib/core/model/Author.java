@@ -1,6 +1,5 @@
 package com.onlib.core.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.annotations.ManyToAny;
@@ -15,25 +14,20 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "books")
-public class Book {
+@Table(name = "authors")
+public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;
 
-    @ManyToMany
-    private Set<Author> authors = new HashSet<>();
-        
+    public Author(){}
 
-    public Book(){}
-
-    public Book(String name) {
+    public Author(String name) {
         this.name = name;
     }
 
-    public void addAuthor(Author author){
-        authors.add(author);
-    }
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books;
 }

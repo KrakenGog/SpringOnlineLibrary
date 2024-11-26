@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.onlib.core.model.Book;
 import com.onlib.core.repository.BookRepository;
+import com.onlib.core.service.BookFileProvider;
 import com.onlib.core.service.SearchingService;
 import com.onlib.core.util.SimpleStringSearcher;
 
@@ -40,6 +41,9 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private BookFileProvider bookFileProvider;
+
     @GetMapping("/searchBooks")
     public List<Book> searchBooks(@RequestParam String query) {
         return searchingService.SearchBooks(new SimpleStringSearcher(), query);
@@ -54,29 +58,12 @@ public class BookController {
             throw new RuntimeException("Cant find book with id: " + id);
     }
 
-    // @GetMapping("/getBookEpubFile")
-    // public ResponseEntity<Resource> getMethodName(@RequestParam long id) throws
-    // RuntimeException, IOException {
-    // Book book = getBook(id);
-    //
-    // Resource file = new ClassPathResource("static/books/" +
-    // book.getEpubFileName());
-    // return ResponseEntity.ok()
-    // .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;
-    // filename=\"file.epub\"")
-    // .contentType(MediaType.APPLICATION_OCTET_STREAM)
-    // .body(file);
-    // }
     @GetMapping("/getBookEpubFile.epub")
-    public ResponseEntity<byte[]> getMethodName(@RequestParam long id) throws RuntimeException, IOException {
-        Book book = getBook(id);
-        File file = ResourceUtils.getFile("classpath:static/books/" + book.getEpubFileName());
-        InputStream in = new FileInputStream(file);
+    public ResponseEntity<byte[]> getBookEpubFile(@RequestParam long id) throws RuntimeException, IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.valueOf("application/epub+zip"));
-        byte[] bytes = in.readAllBytes();
-        in.close();
-        return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+       
+        return new ResponseEntity<>(bookFileProvider.getEpubFile(id), headers, HttpStatus.OK);
     }
 
 }
