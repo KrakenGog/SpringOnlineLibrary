@@ -20,7 +20,7 @@ form.addEventListener('submit', async (event) => {
             const bookDiv = document.createElement('div');
             bookDiv.className = 'book';
             const authorsList = book.authors.join(', ');
-            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorsList})</p> <button>Читать</button>`;
+            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorsList})</p> <div><button>Добавить</button><button>Читать</button></div>`;
 
             resultsDiv.appendChild(bookDiv);
         });

@@ -1,17 +1,26 @@
 html {
     margin: 0;
     padding: 0;
+    min-height: 100%;
+}
+head{
+    margin:0;
+    padding:0;
 }
 * {
     box-sizing: border-box;
 }
 body {
     font-family: Arial, sans-serif;
-    padding: 0;
+
     display: grid;
     place-items: center;
-    height: 50vh;
     margin: 0;
+    padding: 0;
+}
+button{
+
+    margin: 2px;
 }
 .book {
     margin-top: 5px;
@@ -30,19 +39,21 @@ body {
 }
 .navbar{
 
-    padding: 0;
-    margin: 0;
+
+
     background-color: deepskyblue;
-    position:sticky;
-    top: -30%;/*кто уберет этот дурацкий отступ тот лучший*/
+    position:static;
+    top: 0;/*кто уберет этот дурацкий отступ тот лучший*/
     width: 100%;
     z-index: 1000;
 }
 
 .navbar a{
+    margin: 10px 10px;
     float: left;
     display: block;
     color: white;
-    padding: 14px 20px;
-    margin: 0;
+    text-decoration: none;
+
+
 }
