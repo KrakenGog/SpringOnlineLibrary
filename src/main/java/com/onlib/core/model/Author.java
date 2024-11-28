@@ -1,10 +1,16 @@
 package com.onlib.core.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.annotations.ManyToAny;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,6 +34,6 @@ public class Author {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    @ManyToMany(mappedBy = "authors",fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Book> books = new ArrayList<>();
 }

@@ -41,19 +41,18 @@ public class CoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(BookService repo) {
+	public CommandLineRunner commandLineRunner(BookService bookService, BookRepository repo) {
 		return args -> {
-			repo.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч") },
+			bookService.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч") },
 					getBytesFromFile("classpath:static/books/1.epub"));
-			repo.AddBook("После бури", new Author[] { new Author("Луи Витон") },
+			bookService.AddBook("После бури", new Author[] { new Author("Луи Витон") },
 					getBytesFromFile("classpath:static/books/2.epub"));
-			repo.AddBook("Убийство в доме", new Author[] { new Author("Леша Такун") },
+			bookService.AddBook("Убийство в доме", new Author[] { new Author("Леша Такун") },
 					getBytesFromFile("classpath:static/books/3.epub"));
-			repo.AddBook("Шантарам", new Author[] { new Author("Гойдазавр Турлай") },
+			bookService.AddBook("Шантарам", new Author[] { new Author("Гойдазавр Турлай") },
 					getBytesFromFile("classpath:static/books/4.epub"));
-			repo.AddBook("Путишествие слоника", new Author[] { new Author("Левый Правша") },
+			bookService.AddBook("Путишествие слоника", new Author[] { new Author("Левый Правша") },
 					getBytesFromFile("classpath:static/books/5.epub"));
-
 		};
 	}
 

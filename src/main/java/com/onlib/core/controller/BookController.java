@@ -2,6 +2,7 @@ package com.onlib.core.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.onlib.core.dto.BookWithAuthorsDto;
 import com.onlib.core.model.Book;
 import com.onlib.core.repository.BookRepository;
 import com.onlib.core.service.BookFileProvider;
@@ -45,15 +46,15 @@ public class BookController {
     private BookFileProvider bookFileProvider;
 
     @GetMapping("/searchBooks")
-    public List<Book> searchBooks(@RequestParam String query) {
-        return searchingService.SearchBooks(new SimpleStringSearcher(), query);
+    public List<BookWithAuthorsDto> searchBooks(@RequestParam String query) {
+        return searchingService.SearchBooks(new SimpleStringSearcher(), query).stream().map(x -> new BookWithAuthorsDto(x)).toList();
     }
 
     @GetMapping("/getBookInfo")
-    public Book getBook(@RequestParam long id) {
+    public BookWithAuthorsDto getBook(@RequestParam long id) {
         Optional<Book> res = bookRepository.findById(id);
         if (res.isPresent())
-            return res.get();
+            return new BookWithAuthorsDto(res.get());
         else
             throw new RuntimeException("Cant find book with id: " + id);
     }

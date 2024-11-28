@@ -10,6 +10,8 @@ import com.onlib.core.model.Book;
 import com.onlib.core.repository.AuthorRepository;
 import com.onlib.core.repository.BookRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BookService {
     @Autowired
@@ -21,6 +23,7 @@ public class BookService {
     @Autowired
     private BookFileProvider bookFileProvider;
 
+    @Transactional
     public void AddBook(String name, Author[] authors, byte[] epubFile) throws IOException {
         Book book = bookRepository.save(new Book(name));
         bookFileProvider.saveEpubFile(epubFile, book.getId());
