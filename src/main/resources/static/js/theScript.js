@@ -19,8 +19,10 @@ form.addEventListener('submit', async (event) => {
         data.forEach(book => {
             const bookDiv = document.createElement('div');
             bookDiv.className = 'book';
-            const authorsList = book.authors.join(', ');
-            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorsList})</p> <div><button>Добавить</button><button>Читать</button></div>`;
+            const authorsJS = book.authors;
+            const authorNames = authorsJS.map(authors=>authors.name);
+            const authorsStk = authorNames.join(', ')
+            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorNames})</p> <div><button>Добавить</button><button>Читать</button></div>`;
 
             resultsDiv.appendChild(bookDiv);
         });

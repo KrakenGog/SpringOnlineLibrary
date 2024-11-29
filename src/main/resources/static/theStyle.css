@@ -19,8 +19,11 @@ body {
     padding: 0;
 }
 button{
-
     margin: 2px;
+}
+
+form{
+    margin-top: 50px;
 }
 .book {
     margin-top: 5px;
@@ -38,14 +41,17 @@ button{
     justify-content: space-between;
 }
 .navbar{
-
-
-
     background-color: deepskyblue;
     position:static;
-    top: 0;/*кто уберет этот дурацкий отступ тот лучший*/
+    top: 0;
     width: 100%;
     z-index: 1000;
+    height:60px;
+}
+.navbar img{
+    float: left;
+    height:60px;
+    width: auto;
 }
 
 .navbar a{
@@ -54,6 +60,7 @@ button{
     display: block;
     color: white;
     text-decoration: none;
+    line-height: 40px;
 
 
 }

@@ -43,16 +43,23 @@ public class CoreApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(BookService bookService, BookRepository repo) {
 		return args -> {
-			bookService.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч") },
+			bookService.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч"), new Author("Мирон Федоров") },
 					getBytesFromFile("classpath:static/books/1.epub"));
 			bookService.AddBook("После бури", new Author[] { new Author("Луи Витон") },
 					getBytesFromFile("classpath:static/books/2.epub"));
 			bookService.AddBook("Убийство в доме", new Author[] { new Author("Леша Такун") },
 					getBytesFromFile("classpath:static/books/3.epub"));
-			bookService.AddBook("Шантарам", new Author[] { new Author("Гойдазавр Турлай") },
+			bookService.AddBook("Шантарам", new Author[] { new Author("Иваг Турлай") },
 					getBytesFromFile("classpath:static/books/4.epub"));
 			bookService.AddBook("Путишествие слоника", new Author[] { new Author("Левый Правша") },
 					getBytesFromFile("classpath:static/books/5.epub"));
+			bookService.AddBook("Властелин Колец", new Author[] { new Author("Джон Толкин") },
+					getBytesFromFile("classpath:static/books/5.epub"));
+			bookService.AddBook("Минск - Город Сталина", new Author[] { new Author("Иван Турлай") },
+					getBytesFromFile("classpath:static/books/5.epub"));
+			bookService.AddBook("Курс ДИиИ", new Author[] { new Author("Григорий Фихтенгольц") },
+					getBytesFromFile("classpath:static/books/5.epub"));
+
 		};
 	}
 
