@@ -49,8 +49,6 @@ public class CoreApplication {
 					getBytesFromFile("classpath:static/books/2.epub"));
 			bookService.AddBook("Убийство в доме", new Author[] { new Author("Леша Такун") },
 					getBytesFromFile("classpath:static/books/3.epub"));
-			bookService.AddBook("Шантарам", new Author[] { new Author("Иваг Турлай") },
-					getBytesFromFile("classpath:static/books/4.epub"));
 			bookService.AddBook("Путишествие слоника", new Author[] { new Author("Левый Правша") },
 					getBytesFromFile("classpath:static/books/5.epub"));
 			bookService.AddBook("Властелин Колец", new Author[] { new Author("Джон Толкин") },

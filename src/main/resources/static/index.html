@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск книг</title>
     <link rel="stylesheet" href="theStyle.css">
+
+
 </head>
+
 <body>
-<div class="navbar">
-    <img src="GOL_TRUE_PNG.png" alt = "GEELY ONLINE LIBRARY 'GOOOOL'">
-    <a href="">Главная</a>
-    <a href="">Кто прочитал тот сдохнет</a>
-    <a href="">Своя библиотека</a>
-    <a href="">О нас</a>
-</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" defer></script>
+    <script src="./js/epub.min.js" defer></script>
+
+    <div class="navbar">
+        <img src="GOL_TRUE_PNG.png" alt="GEELY ONLINE LIBRARY 'GOOOOL'">
+        <a href="">Главная</a>
+    <!--<a href="">Кто прочитал тот сдохнет</a> -->
+        <a href="">Своя библиотека</a>
+        <a href="">О нас</a>
+    </div>
 
 
 
 
-<form action="/searchBooks" method="GET">
-    <input type="text" name="query" placeholder="Введите название книги" required>
-    <input type="submit" value="Поиск">
-</form>
+    <form action="/searchBooks" method="GET">
+        <input type="text" name="query" placeholder="Введите название книги" required>
+        <input type="submit" value="Поиск">
+    </form>
 
-<div id="results">
-    <!-- Результаты поиска будут добавлены сюда -->
-</div>
+    <div id="results">
+        <!-- Результаты поиска будут добавлены сюда -->
+    </div>
 
-<script src="js/theScript.js">
-</script>
+    
 
+    <!-- Интерфейс для чтения EPUB -->
+    <div id="readerModal" class="modal">
+        <div class="modal-content">
+            <span id="closeRead" class="close">&times;</span>
+            <div id="reader" class="reader"></div>
+        </div>
+    </div>
+
+    <script src="js/theScript.js"></script>
 </body>
+
 </html>

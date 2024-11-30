@@ -47,6 +47,9 @@ public class BookController {
 
     @GetMapping("/searchBooks")
     public List<BookWithAuthorsDto> searchBooks(@RequestParam String query) {
+        if(query == "undefined")
+            query = "";
+            
         return searchingService.SearchBooks(new SimpleStringSearcher(), query).stream().map(x -> new BookWithAuthorsDto(x)).toList();
     }
 
