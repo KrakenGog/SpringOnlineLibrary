@@ -21,7 +21,7 @@ public class BookService {
     private AuthorRepository authorRepository;
 
     @Autowired
-    private BookFileProvider bookFileProvider;
+    private IBookFileProvider bookFileProvider;
 
     @Transactional
     public void AddBook(String name, Author[] authors, byte[] epubFile) throws IOException {

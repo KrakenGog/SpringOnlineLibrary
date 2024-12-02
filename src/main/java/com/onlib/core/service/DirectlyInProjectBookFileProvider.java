@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class DirectlyInProjectBookFileProvider extends BookFileProvider {
+public class DirectlyInProjectBookFileProvider implements IBookFileProvider {
 
     private String savingPath;
 

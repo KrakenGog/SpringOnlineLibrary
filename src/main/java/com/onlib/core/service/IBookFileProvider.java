@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Service;
 
 @Service
-public abstract class BookFileProvider {
+public interface IBookFileProvider {
     
     public abstract void saveEpubFile(byte[] epub, Long id) throws IOException;
 

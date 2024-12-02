@@ -20,7 +20,7 @@ import com.onlib.core.model.Author;
 import com.onlib.core.model.Book;
 
 import com.onlib.core.repository.BookRepository;
-import com.onlib.core.service.BookFileProvider;
+import com.onlib.core.service.IBookFileProvider;
 import com.onlib.core.service.BookService;
 import com.onlib.core.service.DirectlyInProjectBookFileProvider;
 
@@ -62,7 +62,7 @@ public class CoreApplication {
 	}
 
 	@Bean
-	BookFileProvider bookFileProvider() throws IOException {
+	IBookFileProvider bookFileProvider() throws IOException {
 		return new DirectlyInProjectBookFileProvider(
 				Paths.get(loader.getResource("classpath:static/books").getURI()).toString());
 	}
