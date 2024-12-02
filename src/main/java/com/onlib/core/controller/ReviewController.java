@@ -29,11 +29,11 @@ public class ReviewController {
 
     @GetMapping("/addBookReview")
     public void addBookReview(
-            @RequestParam Book book,
-            @RequestParam User user,
+            @RequestParam Long userId,
+            @RequestParam Long bookId,
             @RequestParam String reviewText
     ) {
-        reviewService.addReview(reviewText, user, book);
+        reviewService.addReview(reviewText, userId, bookId);
     }
 
     @GetMapping("/deleteBookReview")
