@@ -35,4 +35,9 @@ public class ReviewController {
     ) {
         reviewService.addReview(reviewText, user, book);
     }
+
+    @GetMapping("/deleteBookReview")
+    public void deleteBookReview(@RequestParam Long id) {
+        reviewService.deleteReview(id);
+    }
 }
