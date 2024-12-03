@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import com.onlib.core.service.UserService;
 import org.apache.catalina.servlets.WebdavServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,8 +42,9 @@ public class CoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(BookService bookService, BookRepository repo) {
+	public CommandLineRunner commandLineRunner(BookService bookService, BookRepository repo, UserService userService) {
 		return args -> {
+			userService.addUser("user", "password");
 			bookService.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч"), new Author("Мирон Федоров") },
 					getBytesFromFile("classpath:static/books/1.epub"));
 			bookService.AddBook("После бури", new Author[] { new Author("Луи Витон") },
