@@ -8,9 +8,9 @@ import com.onlib.core.repository.ReviewRepository;
 import com.onlib.core.repository.UserRepository;
 import com.onlib.core.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +20,23 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    private BookRepository bookRepository;
+
     @GetMapping("/getBookReviews")
-    public List<ReviewWithoutBookDto> getBookReviews(@RequestParam Book book) {
-        return book.getReviews().stream()
+    public ResponseEntity<List<ReviewWithoutBookDto>> getBookReviews(@RequestParam Long bookId) {
+        Book book = bookRepository.findById(bookId).orElse(null);
+        if (book == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(book.getReviews().stream()
                 .map(ReviewWithoutBookDto::new)
-                .toList();
+                .toList(),
+                HttpStatus.OK
+        );
     }
 
-    @GetMapping("/addBookReview")
+    @PostMapping("/addBookReview")
     public void addBookReview(
             @RequestParam Long userId,
             @RequestParam Long bookId,
@@ -36,7 +45,7 @@ public class ReviewController {
         reviewService.addReview(reviewText, userId, bookId);
     }
 
-    @GetMapping("/deleteBookReview")
+    @DeleteMapping("/deleteBookReview")
     public void deleteBookReview(@RequestParam Long id) {
         reviewService.deleteReview(id);
     }
