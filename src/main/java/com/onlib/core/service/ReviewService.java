@@ -35,8 +35,10 @@ public class ReviewService {
         }
 
         Review review = new Review(text);
+        //Review review = reviewRepository.save(new Review(text));
         review.setUser(user);
         review.setBook(book);
+
         reviewRepository.save(review);
     }
 
