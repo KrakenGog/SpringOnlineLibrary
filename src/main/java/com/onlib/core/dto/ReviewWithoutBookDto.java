@@ -4,9 +4,10 @@ import com.onlib.core.model.Review;
 import com.onlib.core.model.User;
 
 public class ReviewWithoutBookDto {
-    Long id;
-    String text;
-    User user;
+
+    public Long id;
+    public String text;
+    public User user;
 
     public ReviewWithoutBookDto(Review review) {
         this.id = review.getId();

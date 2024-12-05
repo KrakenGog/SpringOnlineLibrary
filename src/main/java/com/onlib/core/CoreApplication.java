@@ -6,7 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+
 import com.onlib.core.service.UserService;
+
+import com.onlib.core.model.User;
+import com.onlib.core.repository.UserRepository;
+import com.onlib.core.service.ReviewService;
+
 import org.apache.catalina.servlets.WebdavServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,8 +47,12 @@ public class CoreApplication {
 		return Files.readAllBytes(res.getFile().toPath());
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(BookService bookService, BookRepository repo, UserService userService) {
+
+	public CommandLineRunner commandLineRunner(BookService bookService,
+											   BookRepository bookRepository,
+											   UserRepository userRepository,
+											   ReviewService reviewService,UserService userService) {
+
 		return args -> {
 			userService.addUser("user", "password");
 			bookService.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч"), new Author("Мирон Федоров") },
@@ -60,6 +70,19 @@ public class CoreApplication {
 			bookService.AddBook("Курс ДИиИ", new Author[] { new Author("Григорий Фихтенгольц") },
 					getBytesFromFile("classpath:static/books/5.epub"));
 
+			userRepository.save(new User("Kraken", "zZzZzZzZ"));
+			userRepository.save(new User("Nikvader", "KrasavchikLuchsheAngeli"));
+			userRepository.save(new User("Michel", "********"));
+
+			reviewService.addReview("It's the best book over resource." +
+							"You should read it instread of prayer before sleeping.",
+					userRepository.findByName("Kraken")
+							.orElseThrow()
+							.getId(),
+					bookRepository.findByName("Минск - Город Сталина")
+							.orElseThrow()
+							.getId()
+			);
 		};
 	}
 

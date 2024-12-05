@@ -26,7 +26,7 @@ public class Book {
     private List<Author> authors = new ArrayList<>();
 
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
-    private Set<Review> reviews = new HashSet<>();
+    private List<Review> reviews = new ArrayList<>();
         
 
     public Book(){}
