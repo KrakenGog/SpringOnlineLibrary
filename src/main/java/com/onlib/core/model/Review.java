@@ -3,8 +3,6 @@ package com.onlib.core.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Set;
-
 @Entity
 @Data
 @Table(name = "reviews")
@@ -16,7 +14,7 @@ public class Review {
     private String text;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    private LibraryUser libraryUser;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Book book;

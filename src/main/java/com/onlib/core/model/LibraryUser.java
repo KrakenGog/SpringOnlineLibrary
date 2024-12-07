@@ -15,6 +15,13 @@ public class LibraryUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;
+    private String name;
     private String password;
+
+    public LibraryUser() {}
+
+    public LibraryUser(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 }

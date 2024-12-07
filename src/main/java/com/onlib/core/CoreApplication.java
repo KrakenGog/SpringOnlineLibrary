@@ -1,30 +1,24 @@
 package com.onlib.core;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 
 import com.onlib.core.service.UserService;
 
-import com.onlib.core.model.User;
+import com.onlib.core.model.LibraryUser;
 import com.onlib.core.repository.UserRepository;
 import com.onlib.core.service.ReviewService;
 
-import org.apache.catalina.servlets.WebdavServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.util.ResourceUtils;
 import org.springframework.core.io.Resource;
 import com.onlib.core.model.Author;
-import com.onlib.core.model.Book;
 
 import com.onlib.core.repository.BookRepository;
 import com.onlib.core.service.IBookFileProvider;
@@ -48,6 +42,7 @@ public class CoreApplication {
 	}
 
 
+	@Bean
 	public CommandLineRunner commandLineRunner(BookService bookService,
 											   BookRepository bookRepository,
 											   UserRepository userRepository,
@@ -70,9 +65,10 @@ public class CoreApplication {
 			bookService.AddBook("Курс ДИиИ", new Author[] { new Author("Григорий Фихтенгольц") },
 					getBytesFromFile("classpath:static/books/5.epub"));
 
-			userRepository.save(new User("Kraken", "zZzZzZzZ"));
-			userRepository.save(new User("Nikvader", "KrasavchikLuchsheAngeli"));
-			userRepository.save(new User("Michel", "********"));
+			//userRepository.save(new LibraryUser("Kraken", "zZzZzZzZ"));
+			userService.addUser("Kraken", "zZzZzZzZ");
+			userRepository.save(new LibraryUser("Nikvader", "KrasavchikLuchsheAngeli"));
+			userRepository.save(new LibraryUser("Michel", "********"));
 
 			reviewService.addReview("It's the best book over resource." +
 							"You should read it instread of prayer before sleeping.",
@@ -83,6 +79,8 @@ public class CoreApplication {
 							.orElseThrow()
 							.getId()
 			);
+			reviewService.addReview("Review1", 1L, 1L);
+
 		};
 	}
 

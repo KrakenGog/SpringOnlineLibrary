@@ -2,11 +2,10 @@ package com.onlib.core.service;
 
 import com.onlib.core.model.Book;
 import com.onlib.core.model.Review;
-import com.onlib.core.model.User;
+import com.onlib.core.model.LibraryUser;
 import com.onlib.core.repository.BookRepository;
 import com.onlib.core.repository.ReviewRepository;
 import com.onlib.core.repository.UserRepository;
-import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +23,8 @@ public class ReviewService {
 
     @Transactional
     public void addReview(String text, Long userId, Long bookId) {
-        User user = userRepository.findById(userId).orElse(null);
-        if (user == null) {
+        LibraryUser libraryUser = userRepository.findById(userId).orElse(null);
+        if (libraryUser == null) {
             throw new RuntimeException("user not found");
         }
 
@@ -36,7 +35,7 @@ public class ReviewService {
 
         Review review = new Review(text);
         //Review review = reviewRepository.save(new Review(text));
-        review.setUser(user);
+        review.setLibraryUser(libraryUser);
         review.setBook(book);
 
         reviewRepository.save(review);
