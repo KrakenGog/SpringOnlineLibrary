@@ -50,19 +50,19 @@ public class CoreApplication {
 
 		return args -> {
 			userService.addUser("user", "password");
-			bookService.AddBook("Слово пацана", new Author[] { new Author("Гурам Гурамыч"), new Author("Мирон Федоров") },
+			bookService.AddBook("Слово пацана", "Описание для Слово пацана", new Author[] { new Author("Гурам Гурамыч"), new Author("Мирон Федоров") },
 					getBytesFromFile("classpath:static/books/1.epub"));
-			bookService.AddBook("После бури", new Author[] { new Author("Луи Витон") },
+			bookService.AddBook("После бури", "Описание для После бури", new Author[] { new Author("Луи Витон") },
 					getBytesFromFile("classpath:static/books/2.epub"));
-			bookService.AddBook("Убийство в доме", new Author[] { new Author("Леша Такун") },
+			bookService.AddBook("Убийство в доме", "Описание для Убийство в доме", new Author[] { new Author("Леша Такун") },
 					getBytesFromFile("classpath:static/books/3.epub"));
-			bookService.AddBook("Путишествие слоника", new Author[] { new Author("Левый Правша") },
+			bookService.AddBook("Путешествие слоника", "Описание для Путешествие слоника", new Author[] { new Author("Левый Правша") },
 					getBytesFromFile("classpath:static/books/5.epub"));
-			bookService.AddBook("Властелин Колец", new Author[] { new Author("Джон Толкин") },
+			bookService.AddBook("Властелин Колец", "Описание для Властелин Колец", new Author[] { new Author("Джон Толкин") },
 					getBytesFromFile("classpath:static/books/5.epub"));
-			bookService.AddBook("Минск - Город Сталина", new Author[] { new Author("Иван Турлай") },
+			bookService.AddBook("Минск - Город Сталина", "Описание для Минск - Город Сталина", new Author[] { new Author("Иван Турлай") },
 					getBytesFromFile("classpath:static/books/5.epub"));
-			bookService.AddBook("Курс ДИиИ", new Author[] { new Author("Григорий Фихтенгольц") },
+			bookService.AddBook("Курс ДИиИ", "Описание для Курс ДИиИ", new Author[] { new Author("Григорий Фихтенгольц") },
 					getBytesFromFile("classpath:static/books/5.epub"));
 
 			//userRepository.save(new LibraryUser("Kraken", "zZzZzZzZ"));
@@ -71,7 +71,7 @@ public class CoreApplication {
 			userRepository.save(new LibraryUser("Michel", "********"));
 
 			reviewService.addReview("It's the best book over resource." +
-							"You should read it instread of prayer before sleeping.",
+							"You should read it instead of prayer before sleeping.",
 					userRepository.findByName("Kraken")
 							.orElseThrow()
 							.getId(),
