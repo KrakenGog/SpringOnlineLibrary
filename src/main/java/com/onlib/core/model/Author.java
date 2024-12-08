@@ -21,12 +21,6 @@ public class Author {
 
     private String name;
 
-    public Author(){}
-
-    public Author(String name) {
-        this.name = name;
-    }
-
     @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             joinColumns = @JoinColumn(
@@ -37,4 +31,10 @@ public class Author {
             )
     )
     private List<Book> books = new ArrayList<>();
+
+    public Author(){}
+
+    public Author(String name) {
+        this.name = name;
+    }
 }
