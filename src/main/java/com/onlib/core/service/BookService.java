@@ -24,12 +24,11 @@ public class BookService {
     private IBookFileProvider bookFileProvider;
 
     @Transactional
-    public void AddBook(String name, Author[] authors, byte[] epubFile) throws IOException {
-        Book book = bookRepository.save(new Book(name));
+    public void AddBook(String name, String description, Author[] authors, byte[] epubFile) throws IOException {
+        Book book = bookRepository.save(new Book(name, description));
         bookFileProvider.saveEpubFile(epubFile, book.getId());
         for (var author : authors) {
             Author added = authorRepository.save(author);
-            
             book.addAuthor(added);
         }
     }

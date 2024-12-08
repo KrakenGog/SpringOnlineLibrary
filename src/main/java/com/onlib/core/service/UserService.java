@@ -15,8 +15,10 @@ public class UserService {
 
     @Autowired
     private UserDetailsManager userDetailsManger;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
 

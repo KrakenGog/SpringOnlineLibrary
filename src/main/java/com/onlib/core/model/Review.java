@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "reviews")
@@ -19,7 +17,7 @@ public class Review {
 
     private String text;
 
-    private Date date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -27,4 +25,10 @@ public class Review {
 
     @Column(name = "book_id")
     private Long bookId;
+
+    public Review() {}
+    public Review(String text) {
+        this.text = text;
+        this.date = LocalDateTime.now();
+    }
 }
