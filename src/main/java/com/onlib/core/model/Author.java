@@ -6,16 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.ManyToAny;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
@@ -28,12 +21,20 @@ public class Author {
 
     private String name;
 
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            joinColumns = @JoinColumn(
+                    name = "books_id", referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "authors_id", referencedColumnName = "id"
+            )
+    )
+    private List<Book> books = new ArrayList<>();
+
     public Author(){}
 
     public Author(String name) {
         this.name = name;
     }
-
-    @ManyToMany(mappedBy = "authors",fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Book> books = new ArrayList<>();
 }
