@@ -1,8 +1,14 @@
 package com.onlib.core.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "reviews")
@@ -13,15 +19,12 @@ public class Review {
 
     private String text;
 
+    private Date date;
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private LibraryUser libraryUser;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Book book;
-
-    public Review() {}
-
-    public Review(String text) {
-        this.text = text;
-    }
+    @Column(name = "book_id")
+    private Long bookId;
 }
