@@ -42,4 +42,8 @@ public class Book {
     public void addAuthor(Author author){
         authors.add(author);
     }
+
+    public void addReview(Review review){
+        reviews.add(review);
+    }
 }

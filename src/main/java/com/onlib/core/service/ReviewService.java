@@ -26,14 +26,20 @@ public class ReviewService {
     /// Добавляется ли автоматически review в book?
     @Transactional
     public void addReview(String text, Long userId, Long bookId) {
+        Book book = bookRepository.findById(bookId).orElse(null);
+        if (book == null) {
+            throw new RuntimeException("Can't find book with id " + bookId);
+        }
+
         LibraryUser libraryUser = userRepository.findById(userId).orElse(null);
         if (libraryUser == null) {
-            throw new RuntimeException("user not found");
+            throw new RuntimeException("Can't find user with id " + userId);
         }
 
         Review review = reviewRepository.save(new Review(text));
         review.setLibraryUser(libraryUser);
         review.setBookId(bookId);
+        book.addReview(review);
     }
 
     @Transactional
