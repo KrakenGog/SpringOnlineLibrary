@@ -1,23 +1,26 @@
 package com.onlib.core.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
 import com.onlib.core.model.Book;
+import com.onlib.core.model.Review;
 
 public class BookWithAuthorsDto implements Comparable<BookWithAuthorsDto> {
     public Long id;
     public String name;
-    public Set<AuthorWithoutBooksDto> authors;
+    public String description;
+    public Set<AuthorWithoutBooksDto> authors = new TreeSet<>();
+    public Set<ReviewWithoutBookDto> reviews = new TreeSet<>();
 
 
     public BookWithAuthorsDto(Book book){
-        authors = new TreeSet<>();
-        name = book.getName();
         id = book.getId();
-        for (var author : book.getAuthors()) {
-            authors.add(new AuthorWithoutBooksDto(author));
-        }
+        name = book.getName();
+        description = book.getDescription();
+        book.getAuthors().forEach(author -> authors.add(new AuthorWithoutBooksDto(author)));
+        book.getReviews().forEach(review -> reviews.add(new ReviewWithoutBookDto(review)));
     }
 
 

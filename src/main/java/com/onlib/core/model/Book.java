@@ -22,17 +22,21 @@ public class Book {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    private String description;
+
+    @ManyToMany(mappedBy = "books")
     private List<Author> authors = new ArrayList<>();
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "reviews_id", referencedColumnName = "id")
     private List<Review> reviews = new ArrayList<>();
-        
 
     public Book(){}
 
-    public Book(String name) {
+    public Book(String name, String description)
+    {
         this.name = name;
+        this.description = description;
     }
 
     public void addAuthor(Author author){
