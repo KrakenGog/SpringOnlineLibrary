@@ -1,8 +1,11 @@
 package com.onlib.core.service;
 
 import java.io.IOException;
+import java.util.Optional;
 
+import com.onlib.core.dto.BookWithAuthorsDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.onlib.core.model.Author;
@@ -31,5 +34,14 @@ public class BookService {
             Author added = authorRepository.save(author);
             book.addAuthor(added);
         }
+    }
+
+    @Transactional
+    public BookWithAuthorsDto getBookWithAuthors(Long id) throws NotFoundException {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent())
+            return new BookWithAuthorsDto(book.get());
+        else
+            throw new NotFoundException();
     }
 }
