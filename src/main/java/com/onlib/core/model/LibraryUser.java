@@ -1,11 +1,12 @@
 package com.onlib.core.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -18,10 +19,18 @@ public class LibraryUser {
     private String name;
     private String password;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private List<Book> favouriteBooks = new ArrayList<>();
+
     public LibraryUser() {}
 
     public LibraryUser(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public void addFavouriteBook(Book book) {
+        favouriteBooks.add(book);
     }
 }
