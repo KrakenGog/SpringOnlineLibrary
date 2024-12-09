@@ -43,7 +43,7 @@ public class Book {
         authors.add(author);
     }
 
-    public void addReview(Review review){
+    public void addReview(Review review) {
         reviews.add(review);
     }
 }
