@@ -1,5 +1,7 @@
 package com.onlib.core.controller;
 
+import com.onlib.core.service.BookService;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlib.core.dto.BookWithAuthorsDto;
@@ -12,6 +14,7 @@ import com.onlib.core.util.SimpleStringSearcher;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,31 +33,42 @@ public class BookController {
     private SearchingService searchingService;
 
     @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
     private IBookFileProvider bookFileProvider;
 
+    @Autowired
+    private BookService bookService;
+
     @GetMapping("/searchBooks")
-    public List<BookWithAuthorsDto> searchBooks(@RequestParam String query) {
-        if (query == "undefined")
+    public List<BookWithAuthorsDto> searchBooks(
+            @RequestParam String query
+    ) {
+        if (Objects.equals(query, "undefined"))
             query = "";
 
-        return searchingService.SearchBooks(new SimpleStringSearcher(), query).stream()
-                .map(x -> new BookWithAuthorsDto(x)).toList();
+        return searchingService.SearchBooks(new SimpleStringSearcher(), query)
+                .stream()
+                .map(BookWithAuthorsDto::new)
+                .toList();
     }
 
     @GetMapping("/getBookInfo")
-    public ResponseEntity<BookWithAuthorsDto> getBook(@RequestParam long id) {
-        Optional<Book> res = bookRepository.findById(id);
-        if (res.isPresent())
-            return new ResponseEntity<>(new BookWithAuthorsDto(res.get()), HttpStatus.OK);
-        else
+    public ResponseEntity<BookWithAuthorsDto> getBook(
+            @RequestParam long id
+    ) {
+        try {
+            return new ResponseEntity<>(
+                    bookService.getBookWithAuthors(id),
+                    HttpStatus.OK
+            );
+        } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/getBookEpubFile.epub")
-    public ResponseEntity<byte[]> getBookEpubFile(@RequestParam long id) throws RuntimeException, IOException {
+    public ResponseEntity<byte[]> getBookEpubFile(
+            @RequestParam long id
+    ) throws RuntimeException, IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.valueOf("application/epub+zip"));
         
@@ -64,5 +78,4 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }
