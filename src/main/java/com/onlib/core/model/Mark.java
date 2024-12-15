@@ -11,19 +11,16 @@ import lombok.Getter;
 @Data
 @Table(name = "marks")
 public class Mark {
-//    public static final Long minValue = 0L;
-//    public static final Long maxValue = 100L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-/*    @Min(value = 0L)
-    @Max(value = 100L)*/
+    @Min(value = 0L)
+    @Max(value = 100L)
     @Column(name = "value")
     private Long value;
 
-    /*public void setValue(Long value) throws ConstraintViolationException {
+    public void setValue(Long value) throws ConstraintViolationException {
         if (value < 0L || value > 100L) {
             throw new ConstraintViolationException(null);
         }
@@ -34,5 +31,5 @@ public class Mark {
 
     public Mark(Long value) {
         setValue(value);
-    }*/
+    }
 }
