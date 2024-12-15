@@ -1,7 +1,6 @@
 package com.onlib.core.controller;
 
 import com.onlib.core.dto.ReviewWithoutBookDto;
-import com.onlib.core.repository.BookRepository;
 import com.onlib.core.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -30,10 +29,11 @@ public class ReviewController {
     public ResponseEntity<Object> addBookReview(
             @RequestParam Long userId,
             @RequestParam Long bookId,
-            @RequestParam String text
+            @RequestParam String text,
+            @RequestParam Long mark
     ) {
         try {
-            reviewService.addReview(text, userId, bookId);
+            reviewService.addReview(userId, bookId, text);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

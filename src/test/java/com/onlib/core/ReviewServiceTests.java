@@ -8,16 +8,12 @@ import com.onlib.core.repository.ReviewRepository;
 import com.onlib.core.repository.UserRepository;
 import com.onlib.core.service.ReviewService;
 import jakarta.validation.ConstraintViolationException;
-import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
@@ -72,7 +68,7 @@ public class ReviewServiceTests {
         when(reviewRepository.save(reviewCaptor.capture()))
                 .thenAnswer(invocation -> reviewCaptor.getValue());
 
-        assertDoesNotThrow(() -> reviewService.addReview(userId, bookId, text, mark));
+        assertDoesNotThrow(() -> reviewService.addReview(userId, bookId, text));
 
         Review result = reviewCaptor.getValue();
 
@@ -102,36 +98,36 @@ public class ReviewServiceTests {
         when(bookRepository.findById(any(Long.class))).thenReturn(Optional.empty());
         assertThrows(
                 NotFoundException.class,
-                () -> reviewService.addReview(1L, 1L, "text", 1L)
+                () -> reviewService.addReview(1L, 1L, "text")
         );
 
         // Проверка, что метод не выбрасывает исключение, если книга найдена
          when(bookRepository.findById(any(Long.class))).thenReturn(Optional.of(new Book()));
          assertDoesNotThrow(
-                 () -> reviewService.addReview(1L, 1L, "text", 1L)
+                 () -> reviewService.addReview(1L, 1L, "text")
          );
 
          // Проверка, что выбрасывается NotFoundException, если пользователь не найден
          when(userRepository.findById(any(Long.class))).thenReturn(Optional.empty());
          assertThrows(
                  NotFoundException.class,
-                 () -> reviewService.addReview(1L, 1L, "text", 1L)
+                 () -> reviewService.addReview(1L, 1L, "text")
          );
 
          // Проверка, что метод не выбрасывает исключение, если пользователь найден
          when(userRepository.findById(any(Long.class))).thenReturn(Optional.of(new LibraryUser()));
          assertDoesNotThrow(
-                 () -> reviewService.addReview(1L, 1L, "text", 1L)
+                 () -> reviewService.addReview(1L, 1L, "text")
          );
 
          // Проверка, что выбрасывается ConstraintViolationException, если оценка вне допустимого диапазона
         assertThrows(
                  ConstraintViolationException.class,
-                 () -> reviewService.addReview(1L, 1L, "text", -5L)
+                 () -> reviewService.addReview(1L, 1L, "text")
          );
          assertThrows(
                  ConstraintViolationException.class,
-                 () -> reviewService.addReview(1L, 1L, "text", 105L)
+                 () -> reviewService.addReview(1L, 1L, "text")
          );
     }
 }
