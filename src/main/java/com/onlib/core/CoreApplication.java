@@ -78,9 +78,10 @@ public class CoreApplication {
 							.orElseThrow()
 							.getId(),
 					"It's the best book over resource. " +
-							"You should read it instead of prayer before sleeping."
+							"You should read it instead of prayer before sleeping.",
+					50L
 			);
-			reviewService.addReview(1L, 1L, "Review1");
+			reviewService.addReview(1L, 1L, "Review1", 1L);
 
 		};
 	}

@@ -68,7 +68,7 @@ public class ReviewServiceTests {
         when(reviewRepository.save(reviewCaptor.capture()))
                 .thenAnswer(invocation -> reviewCaptor.getValue());
 
-        assertDoesNotThrow(() -> reviewService.addReview(userId, bookId, text));
+        assertDoesNotThrow(() -> reviewService.addReview(userId, bookId, text, ));
 
         Review result = reviewCaptor.getValue();
 
@@ -98,36 +98,36 @@ public class ReviewServiceTests {
         when(bookRepository.findById(any(Long.class))).thenReturn(Optional.empty());
         assertThrows(
                 NotFoundException.class,
-                () -> reviewService.addReview(1L, 1L, "text")
+                () -> reviewService.addReview(1L, 1L, "text", )
         );
 
         // Проверка, что метод не выбрасывает исключение, если книга найдена
          when(bookRepository.findById(any(Long.class))).thenReturn(Optional.of(new Book()));
          assertDoesNotThrow(
-                 () -> reviewService.addReview(1L, 1L, "text")
+                 () -> reviewService.addReview(1L, 1L, "text", )
          );
 
          // Проверка, что выбрасывается NotFoundException, если пользователь не найден
          when(userRepository.findById(any(Long.class))).thenReturn(Optional.empty());
          assertThrows(
                  NotFoundException.class,
-                 () -> reviewService.addReview(1L, 1L, "text")
+                 () -> reviewService.addReview(1L, 1L, "text", )
          );
 
          // Проверка, что метод не выбрасывает исключение, если пользователь найден
          when(userRepository.findById(any(Long.class))).thenReturn(Optional.of(new LibraryUser()));
          assertDoesNotThrow(
-                 () -> reviewService.addReview(1L, 1L, "text")
+                 () -> reviewService.addReview(1L, 1L, "text", )
          );
 
          // Проверка, что выбрасывается ConstraintViolationException, если оценка вне допустимого диапазона
         assertThrows(
                  ConstraintViolationException.class,
-                 () -> reviewService.addReview(1L, 1L, "text")
+                 () -> reviewService.addReview(1L, 1L, "text", )
          );
          assertThrows(
                  ConstraintViolationException.class,
-                 () -> reviewService.addReview(1L, 1L, "text")
+                 () -> reviewService.addReview(1L, 1L, "text", )
          );
     }
 }

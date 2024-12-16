@@ -30,10 +30,10 @@ public class ReviewController {
             @RequestParam Long userId,
             @RequestParam Long bookId,
             @RequestParam String text,
-            @RequestParam Long mark
+            @RequestParam Long markValue
     ) {
         try {
-            reviewService.addReview(userId, bookId, text);
+            reviewService.addReview(userId, bookId, text, markValue);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

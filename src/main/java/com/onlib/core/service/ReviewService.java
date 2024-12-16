@@ -2,9 +2,11 @@ package com.onlib.core.service;
 
 import com.onlib.core.dto.ReviewWithoutBookDto;
 import com.onlib.core.model.Book;
+import com.onlib.core.model.Mark;
 import com.onlib.core.model.Review;
 import com.onlib.core.model.LibraryUser;
 import com.onlib.core.repository.BookRepository;
+import com.onlib.core.repository.MarkRepository;
 import com.onlib.core.repository.ReviewRepository;
 import com.onlib.core.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -26,10 +28,14 @@ public class ReviewService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private MarkRepository markRepository;
+
     /**
      * @param userId
      * @param bookId
      * @param text
+     * @param markValue
      * @throws NotFoundException            can't find user or book in Database
      * @throws ConstraintViolationException markValue is out or range(0, 100)
      */
@@ -37,7 +43,8 @@ public class ReviewService {
     public void addReview(
             Long userId,
             Long bookId,
-            String text
+            String text,
+            Long markValue
     )
             throws NotFoundException, ConstraintViolationException
     {
@@ -51,7 +58,9 @@ public class ReviewService {
             throw new NotFoundException();
         }
 
-        Review review = new Review(text, book, libraryUser);
+        Mark mark = markRepository.save(new Mark(markValue));
+
+        Review review = new Review(libraryUser, book, text, mark);
         reviewRepository.save(
                 review
         );
