@@ -24,7 +24,7 @@ public class Book {
 
     private String description;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Author> authors = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

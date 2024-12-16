@@ -21,15 +21,7 @@ public class Author {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            joinColumns = @JoinColumn(
-                    name = "books_id", referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "authors_id", referencedColumnName = "id"
-            )
-    )
+    @ManyToMany(mappedBy = "authors")
     private List<Book> books = new ArrayList<>();
 
     public Author(){}
