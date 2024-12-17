@@ -17,19 +17,13 @@ import lombok.Data;
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            joinColumns = @JoinColumn(
-                    name = "books_id", referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "authors_id", referencedColumnName = "id"
-            )
-    )
+    @ManyToMany(mappedBy = "authors_id")
     private List<Book> books = new ArrayList<>();
 
     public Author(){}

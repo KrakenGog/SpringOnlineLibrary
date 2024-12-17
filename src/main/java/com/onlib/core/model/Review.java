@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "text")
@@ -21,7 +22,7 @@ public class Review {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "mark_id", referencedColumnName = "id")
     private Mark mark;
 
@@ -44,7 +45,7 @@ public class Review {
      * @throws ConstraintViolationException text is longer than 500 symbols
      */
     public Review(LibraryUser libraryUser, Book book, String text, Mark mark)
-        throws ConstraintViolationException
+//        throws ConstraintViolationException
     {
         setLibraryUser(libraryUser);
         setBookId(book.getId());

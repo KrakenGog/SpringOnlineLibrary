@@ -58,7 +58,8 @@ public class ReviewService {
             throw new NotFoundException();
         }
 
-        Mark mark = markRepository.save(new Mark(markValue));
+        Mark mark = new Mark(markValue);
+        markRepository.save(mark);
 
         Review review = new Review(libraryUser, book, text, mark);
         reviewRepository.save(
