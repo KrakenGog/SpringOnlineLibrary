@@ -23,7 +23,7 @@ public class Author {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "authors_id")
+    @ManyToMany(mappedBy = "authors")
     private List<Book> books = new ArrayList<>();
 
     public Author(){}

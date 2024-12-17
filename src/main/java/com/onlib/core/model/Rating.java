@@ -12,24 +12,24 @@ import lombok.Data;
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id")
+    @Column(name = "id")
     private Long id;
 
-//    @Min(value = 0L)
-//    @Max(value = 100L)
+    @Min(value = 0L)
+    @Max(value = 100L)
     @Column(name = "number")
     private Long score;
 
-//    /**
-//     * @param score must be in range(0L, 100L)
-//     * @throws ConstraintViolationException if markValue is out of range(0L, 100L)
-//     */
-//    public void setScore(Long score) throws ConstraintViolationException {
-//        if (score < 0L || score > 100L) {
-//            throw new ConstraintViolationException(null);
-//        }
-//        this.score = score;
-//    }
+    /**
+     * @param score must be in range(0L, 100L)
+     * @throws ConstraintViolationException if markValue is out of range(0L, 100L)
+     */
+    public void setScore(Long score) throws ConstraintViolationException {
+        if (score < 0L || score > 100L) {
+            throw new ConstraintViolationException(null);
+        }
+        this.score = score;
+    }
 
     public Rating() {}
 

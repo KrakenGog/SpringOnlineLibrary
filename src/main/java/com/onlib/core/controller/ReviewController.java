@@ -19,10 +19,14 @@ public class ReviewController {
     public ResponseEntity<List<ReviewWithoutBookDto>> getBookReviews(
             @RequestParam Long bookId
     ) {
-        return new ResponseEntity<>(
-                reviewService.getReviewsWithoutBookByBookId(bookId),
-                HttpStatus.OK
-        );
+        try {
+            return new ResponseEntity<>(
+                    reviewService.getReviewsWithoutBookByBookId(bookId),
+                    HttpStatus.OK
+            );
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/addBookReview")

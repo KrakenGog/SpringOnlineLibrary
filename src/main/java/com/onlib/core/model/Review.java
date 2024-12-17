@@ -29,25 +29,20 @@ public class Review {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private LibraryUser libraryUser;
 
-    @Column(name = "book_id")
-    private Long bookId;
-
     public Review() {
         setDate(LocalDateTime.now());
     }
 
     /**
-     * @param book
      * @param text
      * @param rating
      * @throws ConstraintViolationException mark is out of range(0, 100)
      * @throws ConstraintViolationException text is longer than 500 symbols
      */
-    public Review(LibraryUser libraryUser, Book book, String text, Rating rating)
-//        throws ConstraintViolationException
+    public Review(LibraryUser libraryUser, String text, Rating rating)
+        throws ConstraintViolationException
     {
         setLibraryUser(libraryUser);
-        setBookId(book.getId());
         setText(text);
         setRating(rating);
         setDate(LocalDateTime.now());
