@@ -46,7 +46,7 @@ public class CoreApplication {
 	public CommandLineRunner commandLineRunner(BookService bookService,
 											   BookRepository bookRepository,
 											   UserRepository userRepository,
-											   ReviewService reviewService,UserService userService) {
+											   ReviewService reviewService, UserService userService) {
 
 		return args -> {
 			userService.addUser("user", "password");

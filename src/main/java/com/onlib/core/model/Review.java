@@ -2,7 +2,6 @@ package com.onlib.core.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -23,8 +22,8 @@ public class Review {
     private LocalDateTime date;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "mark_id", referencedColumnName = "id")
-    private Mark mark;
+    @JoinColumn(name = "rating_id", referencedColumnName = "id")
+    private Rating rating;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -40,17 +39,17 @@ public class Review {
     /**
      * @param book
      * @param text
-     * @param mark
+     * @param rating
      * @throws ConstraintViolationException mark is out of range(0, 100)
      * @throws ConstraintViolationException text is longer than 500 symbols
      */
-    public Review(LibraryUser libraryUser, Book book, String text, Mark mark)
+    public Review(LibraryUser libraryUser, Book book, String text, Rating rating)
 //        throws ConstraintViolationException
     {
         setLibraryUser(libraryUser);
         setBookId(book.getId());
         setText(text);
-        setMark(mark);
+        setRating(rating);
         setDate(LocalDateTime.now());
     }
 }

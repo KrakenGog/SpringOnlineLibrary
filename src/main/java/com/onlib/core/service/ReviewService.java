@@ -2,11 +2,11 @@ package com.onlib.core.service;
 
 import com.onlib.core.dto.ReviewWithoutBookDto;
 import com.onlib.core.model.Book;
-import com.onlib.core.model.Mark;
+import com.onlib.core.model.Rating;
 import com.onlib.core.model.Review;
 import com.onlib.core.model.LibraryUser;
 import com.onlib.core.repository.BookRepository;
-import com.onlib.core.repository.MarkRepository;
+import com.onlib.core.repository.RatingRepository;
 import com.onlib.core.repository.ReviewRepository;
 import com.onlib.core.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -29,22 +29,22 @@ public class ReviewService {
     private BookRepository bookRepository;
 
     @Autowired
-    private MarkRepository markRepository;
+    private RatingRepository ratingRepository;
 
     /**
      * @param userId
      * @param bookId
      * @param text
-     * @param markValue
+     * @param score
      * @throws NotFoundException            can't find user or book in Database
-     * @throws ConstraintViolationException markValue is out or range(0, 100)
+     * @throws ConstraintViolationException score is out or range(0, 100)
      */
     @Transactional
     public void addReview(
             Long userId,
             Long bookId,
             String text,
-            Long markValue
+            Long score
     )
             throws NotFoundException, ConstraintViolationException
     {
@@ -58,10 +58,10 @@ public class ReviewService {
             throw new NotFoundException();
         }
 
-        Mark mark = new Mark(markValue);
-        markRepository.save(mark);
+        Rating rating = new Rating(score);
+        ratingRepository.save(rating);
 
-        Review review = new Review(libraryUser, book, text, mark);
+        Review review = new Review(libraryUser, book, text, rating);
         reviewRepository.save(
                 review
         );
