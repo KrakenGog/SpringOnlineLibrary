@@ -22,11 +22,15 @@ form.addEventListener('input', async (event) => {
             const authorsJS = book.authors;
             const authorNames = authorsJS.map(authors => authors.name);
             const authorsStk = authorNames.join(', ')
-            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorNames})</p>`;
+            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorNames})</p> `;
+
             const readButton = document.createElement('button');
             readButton.textContent = 'читать';
-            readButton.addEventListener('click', async function () {
-                openReader("getBookEpubFile.epub?id=" + book.id);
+       /*     document.getElementById('readButton').onclick = function() {
+                window.location.href = 'book.html?bookId=1'; // Укажите нужный URL
+            };*/
+            readButton.addEventListener('click',  function () {
+                window.location.href = "book.html?bookId=1";
             });
 
             bookDiv.append(readButton);
