@@ -1,6 +1,7 @@
 package com.onlib.core.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import com.onlib.core.dto.BookWithAuthorsDto;
@@ -27,7 +28,7 @@ public class BookService {
     private IBookFileProvider bookFileProvider;
 
     @Transactional
-    public void AddBook(String name, String description, Author[] authors, byte[] epubFile) throws IOException {
+    public void AddBook(String name, String description, List<Author> authors, byte[] epubFile) throws IOException {
         Book book = bookRepository.save(new Book(name, description));
         bookFileProvider.saveEpubFile(epubFile, book.getId());
         for (var author : authors) {
@@ -37,10 +38,10 @@ public class BookService {
     }
 
     @Transactional
-    public BookWithAuthorsDto getBookWithAuthors(Long id) throws NotFoundException {
+    public Book getBookWithAuthors(Long id) throws NotFoundException {
         Optional<Book> book = bookRepository.findById(id);
         if (book.isPresent())
-            return new BookWithAuthorsDto(book.get());
+            return book.get();
         else
             throw new NotFoundException();
     }
