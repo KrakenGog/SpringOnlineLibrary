@@ -46,7 +46,7 @@ public class CoreApplication {
 	public CommandLineRunner commandLineRunner(BookService bookService,
 											   BookRepository bookRepository,
 											   UserRepository userRepository,
-											   ReviewService reviewService,UserService userService) {
+											   ReviewService reviewService, UserService userService) {
 
 		return args -> {
 			userService.addUser("user", "password");
@@ -70,16 +70,18 @@ public class CoreApplication {
 			userRepository.save(new LibraryUser("Nikvader", "KrasavchikLuchsheAngeli"));
 			userRepository.save(new LibraryUser("Michel", "********"));
 
-			reviewService.addReview("It's the best book over resource." +
-							"You should read it instead of prayer before sleeping.",
+			reviewService.addReview(
 					userRepository.findByName("Kraken")
 							.orElseThrow()
 							.getId(),
 					bookRepository.findByName("Минск - Город Сталина")
 							.orElseThrow()
-							.getId()
+							.getId(),
+					"It's the best book over resource. " +
+							"You should read it instead of prayer before sleeping.",
+					50L
 			);
-			reviewService.addReview("Review1", 1L, 1L);
+			reviewService.addReview(1L, 1L, "Review1", 1L);
 
 		};
 	}

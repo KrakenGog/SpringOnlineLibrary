@@ -8,16 +8,20 @@ import com.onlib.core.repository.ReviewRepository;
 import com.onlib.core.repository.UserRepository;
 import com.onlib.core.service.ReviewService;
 import jakarta.validation.ConstraintViolationException;
+
 import org.apache.catalina.User;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
@@ -72,7 +76,9 @@ public class ReviewServiceTests {
         when(reviewRepository.save(reviewCaptor.capture()))
                 .thenAnswer(invocation -> reviewCaptor.getValue());
 
+
         assertDoesNotThrow(() -> reviewService.addReview(userId, bookId, text, mark));
+
 
         Review result = reviewCaptor.getValue();
 
@@ -125,8 +131,9 @@ public class ReviewServiceTests {
          );
 
          // Проверка, что выбрасывается ConstraintViolationException, если оценка вне допустимого диапазона
-        assertThrows(
+         assertThrows(
                  ConstraintViolationException.class,
+
                  () -> reviewService.addReview(1L, 1L, "text", -5L)
          );
          assertThrows(
@@ -135,3 +142,4 @@ public class ReviewServiceTests {
          );
     }
 }
+
