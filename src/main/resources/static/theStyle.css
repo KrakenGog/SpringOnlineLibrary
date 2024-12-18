@@ -109,3 +109,38 @@ form{
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
+
+
+
+
+/*///////////////////////////////////////////////////*/
+
+.book-container {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+
+.bookCover {
+    width: 100px; /* Задаем ширину для обложки */
+    height: auto; /* Сохраняем пропорции изображения */
+
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.bookInfo{
+    grid-column: 2;
+    grid-row:1;
+}
+h1 {
+    font-size: 24px; /* Размер шрифта для названия */
+    margin: 0; /* Убираем отступы */
+}
+
+b {
+    margin-top: 60px;
+}
