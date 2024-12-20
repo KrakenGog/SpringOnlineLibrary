@@ -22,7 +22,7 @@ form.addEventListener('input', async (event) => {
             const authorsJS = book.authors;
             const authorNames = authorsJS.map(authors => authors.name);
             const authorsStk = authorNames.join(', ')
-            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorNames})</p> `;
+            bookDiv.innerHTML = `<p> <strong>${book.name}</strong> (${authorsStk})</p> `;
 
             const readButton = document.createElement('button');
             readButton.textContent = 'читать';
@@ -30,7 +30,8 @@ form.addEventListener('input', async (event) => {
                 window.location.href = 'book.html?bookId=1'; // Укажите нужный URL
             };*/
             readButton.addEventListener('click',  function () {
-                window.location.href = "book.html?bookId=1";
+                const url = `book.html?bookName=${book.name}&bookAuthors=${authorsStk}&bookDescription=${book.description}`;
+                window.open(url,'_blank','width=800px,height=600px');
             });
 
             bookDiv.append(readButton);

@@ -117,10 +117,12 @@ form{
 
 /*///////////////////////////////////////////////////*/
 
-.book-container {
+.bookContainer {
+    gap: 20px;
     margin-top: 30px;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 3fr ;
+    margin-bottom: 30px;
 }
 
 
@@ -130,6 +132,14 @@ form{
 
     grid-column: 1;
     grid-row: 1;
+}
+
+.description{
+    margin-top: 30px;
+    width: 100%;
+}
+.sigma{
+    width: 600px;
 }
 
 .bookInfo{
