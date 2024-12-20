@@ -30,7 +30,7 @@ form.addEventListener('input', async (event) => {
                 window.location.href = 'book.html?bookId=1'; // Укажите нужный URL
             };*/
             readButton.addEventListener('click',  function () {
-                const url = `book.html?bookName=${book.name}&bookAuthors=${authorsStk}&bookDescription=${book.description}`;
+                const url = `book.html?bookId=${book.id}&bookName=${book.name}&bookAuthors=${authorsStk}&bookDescription=${book.description}`;
                 window.open(url,'_blank','width=800px,height=600px');
             });
 
