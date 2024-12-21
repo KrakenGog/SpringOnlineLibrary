@@ -24,10 +24,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        //.requestMatchers("/index").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/addBookReview/**").authenticated()
+                        .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
