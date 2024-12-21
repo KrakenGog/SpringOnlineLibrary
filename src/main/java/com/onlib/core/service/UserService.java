@@ -9,6 +9,7 @@ import com.onlib.core.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.security.core.userdetails.User;
@@ -21,9 +22,8 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
-    private UserDetailsManager userDetailsManger;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,12 +35,7 @@ public class UserService {
 
     @Transactional
     public void addUser(String username, String password) {
-        userDetailsManger.createUser(
-                User.withUsername(username)
-                        .password(passwordEncoder.encode(password))
-                        .build()
-        );
-        userRepository.save(new LibraryUser(username, password));
+        userRepository.save(new LibraryUser(username, passwordEncoder.encode(password)));
     }
 
     @Transactional

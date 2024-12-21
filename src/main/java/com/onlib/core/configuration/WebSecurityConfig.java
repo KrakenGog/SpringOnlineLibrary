@@ -1,5 +1,6 @@
 package com.onlib.core.configuration;
 
+import com.onlib.core.service.LibraryUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -39,9 +40,8 @@ public class WebSecurityConfig {
 
 
     @Bean
-    public UserDetailsManager userDetailsService() {
-
-        return new InMemoryUserDetailsManager();
+    public UserDetailsService userDetailsService() {
+        return new LibraryUserDetailsService();
     }
 
 }
