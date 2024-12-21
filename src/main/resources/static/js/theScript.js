@@ -26,13 +26,47 @@ form.addEventListener('input', async (event) => {
 
             const readButton = document.createElement('button');
             readButton.textContent = 'читать';
-       /*     document.getElementById('readButton').onclick = function() {
-                window.location.href = 'book.html?bookId=1'; // Укажите нужный URL
-            };*/
-            readButton.addEventListener('click',  function () {
+            readButton.setAttribute('data-bookName', book.name);
+            readButton.setAttribute('data-bookAuthors', authorsStk);
+            readButton.setAttribute('data-bookDescription',book.description);
+            readButton.setAttribute('epubName', book.epub );//хз как это должно работать
+            /*     document.getElementById('readButton').onclick = function() {
+                     window.location.href = 'book.html?bookId=1'; // Укажите нужный URL
+                 };*/
+            /* старая функция которая открывала книгу в новой вкладке readButton.addEventListener('click',  function () {
                 const url = `book.html?bookId=${book.id}&bookName=${book.name}&bookAuthors=${authorsStk}&bookDescription=${book.description}`;
                 window.open(url,'_blank','width=800px,height=600px');
-            });
+            });*/
+
+            /*новая функция которая используется для открытия модальгого окна*/
+            readButton.onclick = function(event) {
+                event.preventDefault();
+                const bookName = readButton.getAttribute('data-bookName');
+                const bookAuthors = readButton.getAttribute('data-bookAuthors');
+                const bookDescription = readButton.getAttribute('data-bookDescription');
+                const bookEpub = readButton.getAttribute('epubName');
+                // Обновление содержимого модального окна
+                document.getElementById("bookAbout").textContent = bookName+' ('+bookAuthors+')';
+                //document.getElementById("authors").textContent = bookAuthors;
+                document.getElementById("description").textContent = bookDescription;
+
+                // Показываем модальное окно
+                document.getElementById("modalWin").style.display = "block";
+            };
+
+// Закрытие модального окна
+            function closeModal() {
+                document.getElementById("modalWin").style.display = "none";
+            }
+            document.getElementById('closeModal').onclick = closeModal;
+
+            document.querySelector('.modal_background').onclick = function(event) {
+                // Закрываем модальное окно, только если кликнули на фон
+                if (event.target === this) {
+                    closeModal();
+                }
+            };
+            //document.getElementById('readBook').onclick = openReader(epubName);
 
             bookDiv.append(readButton);
             resultsDiv.appendChild(bookDiv);

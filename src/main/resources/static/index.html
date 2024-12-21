@@ -30,11 +30,28 @@
         <input type="submit" value="Поиск">
     </form>
 
+
+
     <div id="results">
         <!-- Результаты поиска будут добавлены сюда -->
     </div>
 
-    
+    <div id="modalWin" class="modalWin">
+        <div class="modal_background" onclick="closeModal()">
+
+            <div class="modal_content">
+                <button id="closeModal">X</button>
+                <div class="bookContainer">
+                    <img id="bookCover" src="Naval_glory_of_belarus.jpg" alt="kartinochka" class="bookCover">
+                    <p id="bookAbout">About</p>
+
+                </div>
+
+                <p id="description">Описание</p>
+                <button id="readBook">Читать</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Интерфейс для чтения EPUB -->
     <div id="readerModal" class="modal">

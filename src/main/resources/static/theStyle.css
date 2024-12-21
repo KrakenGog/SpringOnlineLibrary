@@ -132,7 +132,7 @@ form {
     margin-top: 30px;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 
@@ -145,26 +145,84 @@ form {
     grid-column: 1;
     grid-row: 1;
 }
+.bookAbout {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/*кнопка читатьт*/
+#readBook{
+
+    width: 80%;
+
+}
 
 .description {
     margin-top: 30px;
     width: 100%;
 }
 
-.sigma {
-    width: 600px;
+
+.modalWin {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Фиксированное положение */
+    z-index: 1000; /* На переднем плане */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Темный фон */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
 }
 
-.bookInfo {
+.modal_background {
+    display: flex; /* Устанавливаем флекс для центрирования содержимого */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    width: 100%;
+    height: 100%;
+}
+
+.modal_content {
+    position: relative; /* Для позиционирования кнопки */
+    background-color: #ffffff; /* Белый фон для модального окна */
+    padding: 20px;
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
+    max-width: 650px; /* Максимальная ширина */
+    width: 90%; /* Ширина по умолчанию */
+    text-align: center; /* Центрирование текста */
+}
+
+/*крестик*/
+#closeModal {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Отступ сверху */
+    right: 10px; /* Отступ справа */
+    background-color: transparent; /* Прозрачный фон */
+    border: none; /* Убираем границу */
+    color: #000; /* Цвет текста */
+    font-size: 20px; /* Размер шрифта для кнопки */
+    cursor: pointer; /* Курсор указателя */
+}
+
+#closeModal:hover {
+    color: #ff0000; /* Цвет текста при наведении */
+}
+
+
+/* какая-то хня от прошлых попыток страшно все удалять вдруг тут чтото понадобится
+.bookAbout {
     grid-column: 2;
     grid-row: 1;
 }
 
 h1 {
     font-size: 24px;
-    /* Размер шрифта для названия */
-    margin: 0;
-    /* Убираем отступы */
+    /* Размер шрифта для названия
+margin: 0;
+/* Убираем отступы
 }
 
 b {
@@ -174,12 +232,12 @@ b {
 
 
 .arrow-left {
-   background-image: url(images/arrow.png);
-   transform: scaleX(-1);
-   display: block;
+    background-image: url(images/arrow.png);
+    transform: scaleX(-1);
+    display: block;
 }
 
 .arrow-right {
     background-image: url(images/arrow.png);
     display: block;
-}
+} */
