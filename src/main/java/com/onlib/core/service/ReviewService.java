@@ -1,6 +1,6 @@
 package com.onlib.core.service;
 
-import com.onlib.core.dto.ReviewWithoutBookDto;
+import com.onlib.core.dto.ReviewDto;
 import com.onlib.core.model.Book;
 import com.onlib.core.model.Rating;
 import com.onlib.core.model.Review;
@@ -84,14 +84,14 @@ public class ReviewService {
     }
 
     @Transactional
-    public List<ReviewWithoutBookDto> getReviewsWithoutBookByBookId(Long bookId) throws NotFoundException {
+    public List<ReviewDto> getReviewsWithoutBookByBookId(Long bookId) throws NotFoundException {
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isEmpty()) {
             throw new NotFoundException();
         }
         List<Review> reviews = book.get().getReviews();
         return reviews.stream()
-                .map(ReviewWithoutBookDto::new)
+                .map(ReviewDto::new)
                 .toList();
     }
 }
