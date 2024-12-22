@@ -22,6 +22,33 @@ body {
     padding: 0;
 }
 
+.navigation-bar {
+    &__raw {}
+    &__img-element {}
+    &__text-element {}
+}
+.search-form {
+    &__label {}
+    &__results {}
+}
+.modal-window {
+    display: none;
+    &__background {}
+    &__window {}
+    &__content-place {}
+}
+.close-button {
+}
+.modal {
+}
+.modal-content {
+}
+.close {
+}
+.reader {
+}
+
+
 button {
     margin: 2px;
 }
