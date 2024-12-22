@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- Для чего это?-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" defer></script>
     <script src="./js/epub.min.js" defer></script>
     
@@ -24,7 +25,7 @@
     <form class="search-form" id="search-form" action="/searchBooks" method="GET">
         <label for="query" class="search-form__label">Поиск</label>
         <input type="text" name="query" id="query" placeholder="Введите название книги" required>
-        <div class="search-form__results", id="search-form__results">
+        <div class="search-form__results" id="search-form__results">
             <!-- Результаты поиска будут добавлены сюда -->
         </div>
     </form>
@@ -34,32 +35,10 @@
         <div class="modal-window__background" onclick="closeModal()">
             <div class="modal-window__window">
                 <button class="close-button" onclick="closeModal()">
-                    <img src="img/indexImg/cross.png">
+                    <img src="img/indexImg/cross.png" alt="close button">
                 </button>
 
-                <div class="modal-window__content book-info-content", id="book-info-content">
-                    <img src="img/default_book_img.jpg" class="book-info-content__img">
-                    <div class="book-info-content__column">
-                        <p class="book-info-content__header", id="book-info-content__name">
-                            <!-- Результаты поиска будут добавлены сюда -->
-                        </p>
-                        <p class="book-info-content__text">Авторы:</p>
-                        <div class="book-info-content__column", id="book-info-content__authors">
-                            <!-- Результаты поиска будут добавлены сюда -->
-                        </div>
-                    </div>
-                    <p class="book-info-content__text", id="book-info-content__description">
-                        <!-- Результаты поиска будут добавлены сюда -->
-                    </p>
-                    <div class="book-info-content__column", id="book-info-content__reviews">
-                        <!-- Результаты поиска будут добавлены сюда -->
-                    </div>
-                    <button class="book-info-content__button">
-                        <!-- Обработка событий происходит в js файлах -->
-                        Читать
-                    </button>
-                </div>
-                <div class="modal-window__content", id="author-info-content"></div>
+                <div class="modal-window__content-place" id="content-place"></div>
             </div>
         </div>
     </div>
@@ -73,7 +52,9 @@
         </div>
     </div>
 
-    <script src="js/theScript.js"></script>
+    <script src="js/indexScript.js"></script>
+
+    <!-- Для чего это?-->
     <script src="js/masterWindow.js"></script>
 </body>
 
