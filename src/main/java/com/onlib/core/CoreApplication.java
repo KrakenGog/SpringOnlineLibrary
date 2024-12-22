@@ -45,7 +45,8 @@ public class CoreApplication {
 	public CommandLineRunner commandLineRunner(BookService bookService,
 											   BookRepository bookRepository,
 											   UserRepository userRepository,
-											   ReviewService reviewService, UserService userService) {
+											   ReviewService reviewService,
+											   UserService userService) {
 
 		return args -> {
 			userService.addUser("user", "password");
@@ -72,8 +73,8 @@ public class CoreApplication {
 
 			// userRepository.save(new LibraryUser("Kraken", "zZzZzZzZ"));
 			userService.addUser("Kraken", "zZzZzZzZ");
-			userRepository.save(new LibraryUser("Nikvader", "KrasavchikLuchsheAngeli"));
-			userRepository.save(new LibraryUser("Michel", "********"));
+			userService.addUser("Nikvader", "KrasavchikLuchsheAngeli");
+			userService.addUser("Michel", "********");
 
 			reviewService.addReview(
 					userRepository.findByName("Kraken")

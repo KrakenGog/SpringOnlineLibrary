@@ -1,5 +1,6 @@
 package com.onlib.core.configuration;
 
+import com.onlib.core.service.LibraryUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -23,10 +24,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        //.requestMatchers("/index").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/addBookReview/**").authenticated()
+                        .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
@@ -39,9 +43,8 @@ public class WebSecurityConfig {
 
 
     @Bean
-    public UserDetailsManager userDetailsService() {
-
-        return new InMemoryUserDetailsManager();
+    public UserDetailsService userDetailsService() {
+        return new LibraryUserDetailsService();
     }
 
 }
