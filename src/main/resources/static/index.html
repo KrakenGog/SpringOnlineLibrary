@@ -5,53 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск книг</title>
-    <link rel="stylesheet" href="theStyle.css">
-
-
+    <link rel="stylesheet" href="css/indexStyle.css">
 </head>
 
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" defer></script>
     <script src="./js/epub.min.js" defer></script>
-
-    <div class="navbar">
-        <img src="GOL_TRUE_PNG.png" alt="GEELY ONLINE LIBRARY 'GOOOOL'">
-        <a href="">Главная</a>
-    <!--<a href="">Кто прочитал тот сдохнет</a> -->
-        <a href="">Своя библиотека</a>
-        <a href="">О нас</a>
+    
+    <div class="navigation-bar">
+        <div class="navigation-bar__raw">
+            <img src="img/library_icon.png" alt="goooool" class="navigation-bar_img-element">
+            <a href="index.html" class="navigation-bar__text-element">Главная</a>
+            <a href="" class="navigation-bar__text-element">Своя библиотека</a>
+            <a href="" class="navigation-bar__text-element">О нас</a>
+        </div>
     </div>
 
-
-
-
-    <form action="/searchBooks" method="GET">
-        <input type="text" name="query" placeholder="Введите название книги" required>
-        <input type="submit" value="Поиск">
+    <form class="search-form" id="search-form" action="/searchBooks" method="GET">
+        <label for="query" class="search-form__label">Поиск</label>
+        <input type="text" name="query" id="query" placeholder="Введите название книги" required>
+        <div class="search-form__results", id="search-form__results">
+            <!-- Результаты поиска будут добавлены сюда -->
+        </div>
     </form>
 
+    <!-- Окно для работы с книгами и авторами -->
+    <div class="modal-window" id="modal-window">
+        <div class="modal-window__background" onclick="closeModal()">
+            <div class="modal-window__window">
+                <button class="close-button" onclick="closeModal()">
+                    <img src="img/indexImg/cross.png">
+                </button>
 
-
-    <div id="results">
-        <!-- Результаты поиска будут добавлены сюда -->
-    </div>
-
-    <div id="modalWin" class="modalWin">
-        <div class="modal_background" onclick="closeModal()">
-
-            <div class="modal_content">
-                <button id="closeModal">X</button>
-                <div class="bookContainer">
-                    <img id="bookCover" src="Naval_glory_of_belarus.jpg" alt="kartinochka" class="bookCover">
-                    <p id="bookAbout">About</p>
-
+                <div class="modal-window__content book-info-content", id="book-info-content">
+                    <img src="img/default_book_img.jpg" class="book-info-content__img">
+                    <div class="book-info-content__column">
+                        <p class="book-info-content__header", id="book-info-content__name">
+                            <!-- Результаты поиска будут добавлены сюда -->
+                        </p>
+                        <p class="book-info-content__text">Авторы:</p>
+                        <div class="book-info-content__column", id="book-info-content__authors">
+                            <!-- Результаты поиска будут добавлены сюда -->
+                        </div>
+                    </div>
+                    <p class="book-info-content__text", id="book-info-content__description">
+                        <!-- Результаты поиска будут добавлены сюда -->
+                    </p>
+                    <div class="book-info-content__column", id="book-info-content__reviews">
+                        <!-- Результаты поиска будут добавлены сюда -->
+                    </div>
+                    <button class="book-info-content__button">
+                        <!-- Обработка событий происходит в js файлах -->
+                        Читать
+                    </button>
                 </div>
-
-                <p id="description">Описание</p>
-                <button id="readBook">Читать</button>
+                <div class="modal-window__content", id="author-info-content"></div>
             </div>
         </div>
     </div>
+
 
     <!-- Интерфейс для чтения EPUB -->
     <div id="readerModal" class="modal">

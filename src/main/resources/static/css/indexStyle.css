@@ -48,7 +48,7 @@ form {
     justify-content: space-between;
 }
 
-.navbar {
+.navigation-bar {
     background-color: deepskyblue;
     position: static;
     top: 0;
@@ -57,21 +57,19 @@ form {
     height: 60px;
 }
 
-.navbar img {
+.navigation-bar img {
     float: left;
     height: 60px;
     width: auto;
 }
 
-.navbar a {
+.navigation-bar a {
     margin: 10px 10px;
     float: left;
     display: block;
     color: white;
     text-decoration: none;
     line-height: 40px;
-
-
 }
 
 .modal {
