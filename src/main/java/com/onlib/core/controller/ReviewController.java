@@ -1,6 +1,6 @@
 package com.onlib.core.controller;
 
-import com.onlib.core.dto.ReviewWithoutBookDto;
+import com.onlib.core.dto.ReviewDto;
 import com.onlib.core.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -16,7 +16,7 @@ public class ReviewController {
     ReviewService reviewService;
 
     @GetMapping("/getBookReviews")
-    public ResponseEntity<List<ReviewWithoutBookDto>> getBookReviews(
+    public ResponseEntity<List<ReviewDto>> getBookReviews(
             @RequestParam Long bookId
     ) {
         try {
