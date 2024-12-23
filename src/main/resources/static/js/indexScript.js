@@ -67,6 +67,7 @@ async function showBookInfo(event, bookId) {
     const nameHtml = bookInfoContent.querySelector("#name");
     const authorsDivHtml = bookInfoContent.querySelector("#authors");
     const descriptionHtml = bookInfoContent.querySelector("#description");
+    const addReviewFormHtml = bookInfoContent.querySelector("#add-review-form");
     const reviewsDivHtml = bookInfoContent.querySelector("#reviews");
     const readButton = bookInfoContent.querySelector("#read-button");
 
@@ -77,17 +78,55 @@ async function showBookInfo(event, bookId) {
     bookInfo.authors.forEach(author => authorsDivHtml.append(createAuthorP(author)));
     // Описание
     descriptionHtml.textContent = bookInfo.description;
-    // Кнопочка добавления отзыва
-    const addReviewButton = document.createElement('button');
-    addReviewButton
+
+    // Кнопка для написания отзыва
+    const submitReviewButton = addReviewFormHtml.querySelector('#submit-button');
+
+    submitReviewButton.onclick = async (event) => {
+        event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
+        const addReviewFormData = new FormData(addReviewFormHtml);
+        const reviewText = addReviewFormData.get('review-text');
+        const rating = addReviewFormData.get('rating');
+
+        try {
+            await addReview(reviewText, rating, bookInfo.id);
+            alert('Отзыв успешно добавлен!');
+        } catch (error) {
+            console.error('Ошибка при добавлении отзыва:', error);
+            alert('Произошла ошибка при добавлении отзыва.');
+        }
+    };
+
     // Список отзывов
     bookInfo.reviews.forEach(review => reviewsDivHtml.append(createReviewDiv(review)));
     // Кнопка для чтения
-    readButton.onclick = (event) => readBook(event, bookId);
+    readButton.onclick = (event) => readBook(event, bookInfo.id);
 
     // Показываем модальное окно
     modalWindow.style.display = "block";
 }
+
+async function addReview(reviewText, rating, bookId) {
+    const response = await fetch('/addBookReview', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            bookId: bookId,
+            text: reviewText,
+            rating: rating
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error('Ошибка при добавлении отзыва');
+    }
+
+    return await response.json();
+}
+
 
 function createAuthorP(author) {
     const authorP = document.createElement('p');
