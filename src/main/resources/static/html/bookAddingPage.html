@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить книгу</title>
 </head>
 <body>
-$END$
+<h1>Добавить книгу</h1>
+<form id="add-book-form">
+    <label for="book-name">Имя книги:</label>
+    <input type="text" id="book-name" name="book-name" required><br><br>
+
+    <label for="book-description">Описание:</label>
+    <textarea id="book-description" name="book-description" required></textarea><br><br>
+
+    <label for="author-search">Поиск авторов:</label>
+    <input type="text" id="author-search" name="author-search"><br><br>
+    <div id="author-results"></div><br>
+
+    <label for="book-file">Файл книги:</label>
+    <input type="file" id="book-file" name="book-file" required><br><br>
+
+    <button type="submit">Добавить книгу</button>
+</form>
+
+<script src="../js/bookAdd.js"></script>
 </body>
 </html>
