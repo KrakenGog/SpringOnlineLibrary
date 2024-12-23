@@ -142,7 +142,22 @@ button {
 form {
     margin-top: 50px;
 }
-
+.review-info{    margin-top: 5px;
+                 margin-bottom: 5px;
+                 border: 1px solid #ccc;
+                 white-space: nowrap;
+                 /* Запрещает перенос текста на новую строку */
+                 text-overflow: ellipsis;
+                 /*многоточие если текст не влез*/
+                 overflow: hidden;
+                 padding: 0 10px;
+                 border-radius: 5px;
+                 max-height: 30px;
+                 min-width: 600px;
+                 display: flex;
+                 align-items: center;
+                 justify-content: space-between;
+}
 .book-div {
     margin-top: 5px;
     margin-bottom: 5px;
