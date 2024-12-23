@@ -226,6 +226,40 @@ form {
     grid-template-columns: 10fr 15fr 15fr;
 }
 
+/* страница автора*/
+
+.author-container {
+    display: flex; /* Flexbox для расположения портрета и информации */
+    align-items: center; /* Центрируем по вертикали */
+    padding: 20px; /* Отступы */
+    background-color: #f9f9f9; /* Фоновый цвет */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+.author-portrait img {
+    max-width: 150px; /* Ограничение ширины портрета */
+    border-radius: 50%; /* Круглая форма */
+    margin-right: 20px; /* Отступ справа от портрета */
+}
+
+.author-info {
+    flex: 1; /* Заставляем блок занимать оставшееся пространство */
+}
+
+.books-list {
+    margin-top: 20px; /* Отступ сверху для списка книг */
+    padding: 10px; /* Отступы */
+    background-color: #ffffff; /* Белый фон для списка */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+#book-list {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы */
+}
+
 /* какая-то хня от прошлых попыток страшно все удалять вдруг тут чтото понадобится
 .bookAbout {
     grid-column: 2;
