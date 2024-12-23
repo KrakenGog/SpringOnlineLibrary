@@ -3,10 +3,10 @@ const resultsDiv = document.getElementById('search-form__results');
 const modalWindow = document.getElementById("modal-window");
 const contentPlace = document.getElementById("content-place");
 
-form.oninput = (event) => searchBooks(event);
+form.oninput = () => searchBooks();
 
-async function searchBooks(event){
-    event.preventDefault();
+async function searchBooks(){
+
 
     const formData = new FormData(form);
     const query = formData.get('query');
@@ -77,13 +77,16 @@ async function showBookInfo(event, bookId) {
     bookInfo.authors.forEach(author => authorsDivHtml.append(createAuthorP(author)));
     // Описание
     descriptionHtml.textContent = bookInfo.description;
+    // Кнопочка добавления отзыва
+    const addReviewButton = document.createElement('button');
+    addReviewButton
     // Список отзывов
     bookInfo.reviews.forEach(review => reviewsDivHtml.append(createReviewDiv(review)));
     // Кнопка для чтения
     readButton.onclick = (event) => readBook(event, bookId);
 
     // Показываем модальное окно
-    modalWindow.display = "block";
+    modalWindow.style.display = "block";
 }
 
 function createAuthorP(author) {
