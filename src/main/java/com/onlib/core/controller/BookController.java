@@ -90,7 +90,6 @@ public class BookController {
             @RequestParam List<Long> authorsId,
             @RequestParam MultipartFile file) {
         try {
-            authorService.getAuthor(1L);
             bookService.AddBook(
                     name,
                     description,
