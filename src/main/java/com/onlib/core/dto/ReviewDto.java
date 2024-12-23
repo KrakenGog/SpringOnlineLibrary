@@ -9,12 +9,14 @@ public class ReviewDto implements Comparable<ReviewDto> {
     public Long id;
     public String text;
     public String date;
+    public Long rating;
     public UserWithoutPasswordDto user;
 
     public ReviewDto(Review review) {
         this.id = review.getId();
         this.text = review.getText();
         this.user = new UserWithoutPasswordDto(review.getLibraryUser());
+        this.rating = review.getRating().getScore();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.date = review.getDate().format(formatter);

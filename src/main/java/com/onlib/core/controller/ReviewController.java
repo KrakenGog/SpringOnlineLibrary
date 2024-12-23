@@ -37,7 +37,7 @@ public class ReviewController {
         }
     }
 
-    @PostMapping("/addBookReview")
+    @GetMapping("/addBookReview")
     public ResponseEntity<Object> addBookReview(
             @RequestParam Long bookId,
             @RequestParam String text,

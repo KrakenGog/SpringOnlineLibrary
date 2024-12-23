@@ -86,7 +86,7 @@ async function showBookInfo(event, bookId) {
         event.preventDefault(); // Предотвращаем отправку формы по умолчанию
 
         const addReviewFormData = new FormData(addReviewFormHtml);
-        const reviewText = addReviewFormData.get('review-text');
+        const reviewText = addReviewFormData.get('reviewText');
         const rating = addReviewFormData.get('rating');
 
         try {
@@ -99,7 +99,9 @@ async function showBookInfo(event, bookId) {
     };
 
     // Список отзывов
-    bookInfo.reviews.forEach(review => reviewsDivHtml.append(createReviewDiv(review)));
+    for (const review of bookInfo.reviews) {
+        reviewsDivHtml.append(await createReviewDiv(review));
+    }
     // Кнопка для чтения
     readButton.onclick = (event) => readBook(event, bookInfo.id);
 
@@ -108,23 +110,12 @@ async function showBookInfo(event, bookId) {
 }
 
 async function addReview(reviewText, rating, bookId) {
-    const response = await fetch('/addBookReview', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            bookId: bookId,
-            text: reviewText,
-            rating: rating
-        })
-    });
+    const response = await fetch(`/addBookReview?bookId=${bookId}&text=${reviewText}&rating=${rating}`);
+
 
     if (!response.ok) {
         throw new Error('Ошибка при добавлении отзыва');
     }
-
-    return await response.json();
 }
 
 
@@ -161,7 +152,7 @@ async function createReviewDiv(review) {
     // Заполняем поля
     dateHtml.textContent = review.date;
     userNameHtml.textContent = review.user.name;
-    markHtml.textContent = review.mark;
+    markHtml.textContent = review.rating;
     textHtml.textContent = review.text;
 
 
@@ -171,7 +162,7 @@ async function createReviewDiv(review) {
     // На будущее сохраню id пользователя
     userNameHtml.setAttribute("userId", review.user.id);
 
-    return reviewDiv;
+    return bufferDiv;
 }
 
 async function readBook(event, bookId) {
