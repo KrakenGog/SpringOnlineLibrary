@@ -290,6 +290,7 @@ form {
 
 
 .modal-window {
+    overflow: auto;
     display: none; /* Скрыто по умолчанию */
     position: fixed; /* Фиксированное положение */
     z-index: 1000; /* На переднем плане */
@@ -311,6 +312,7 @@ form {
 }
 
 .modal-window__window {
+    overflow: auto;
     position: relative; /* Для позиционирования кнопки */
     background-color: #ffffff; /* Белый фон для модального окна */
     padding: 20px;
@@ -324,7 +326,7 @@ form {
 
 /*крестик*/
 #closeModal {
-    position: absolute; /* Абсолютное позиционирование */
+    /*position: absolute; /* Абсолютное позиционирование */
     top: 10px; /* Отступ сверху */
     right: 10px; /* Отступ справа */
     background-color: transparent; /* Прозрачный фон */
