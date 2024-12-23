@@ -176,9 +176,7 @@ async function createReviewDiv(review) {
 
 async function readBook(event, bookId) {
     event.preventDefault();
-
-    const epubUrl = await fetch(`getBookEpubFile.epub?${encodeURIComponent(bookId)}`);
-    openReader(epubUrl);
+    openReader(bookId);
 }
 
 // Закрытие модального окна
@@ -186,17 +184,9 @@ function closeModal() {
     modalWindow.style.display = "none";
 }
 
-function openReader(epubUrl) {
-    const elem = document.getElementById('reader');
-    elem.innerHTML = elem.innerText || elem.textContent;
-    document.getElementById('readerModal').style.display = "block";
-    const book = ePub(epubUrl);
-    const rendition = book.renderTo("reader", {
-        spread: "always",
-        width: "100%",
-        height: "100%"
-    });
-    rendition.display();
+function openReader(bookId) {
+    const url = `/html/bookReadingPage.html?id=${bookId}`;
+    window.open(url,'_blank');
 }
 
 
