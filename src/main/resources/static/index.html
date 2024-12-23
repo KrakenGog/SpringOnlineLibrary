@@ -18,14 +18,14 @@
             <img src="img/library_icon.png" alt="goooool" class="navigation-bar_img-element">
             <a href="index.html" class="navigation-bar__text-element">Главная</a>
             <a href="" class="navigation-bar__text-element">Своя библиотека</a>
-            <a href="" class="navigation-bar__text-element">О нас</a>
-            <a href="/login" class="navigation-bar__text-element">Авторизация</a>
-            <a href="" class="navigation-bar__text-element">Регистрация</a>
+            <a href="About.html" class="navigation-bar__text-element">О нас</a>
+            <a href="/login.html" class="navigation-bar__text-element">Авторизация</a>
+            <a href="/register.html" class="navigation-bar__text-element">Регистрация</a>
         </div>
     </div>
 
     <form class="search-form" id="search-form" action="/searchBooks" method="GET">
-        <label for="query" class="search-form__label">Поиск</label>
+
         <input type="text" name="query" id="query" placeholder="Введите название книги" required>
         <div class="search-form__results" id="search-form__results">
             <!-- Результаты поиска будут добавлены сюда -->
@@ -35,13 +35,15 @@
     <!-- Окно для работы с книгами и авторами -->
     <div class="modal-window" id="modal-window">
         <div class="modal-window__background" onclick="closeModal()">
-            <div class="modal-window__window">
+            <div class="modal-window__window" onclick="event.stopPropagation()">
                 <button class="close-button" onclick="closeModal()">
                     <img src="img/indexImg/cross.png" alt="close button">
                 </button>
 
                 <!-- Место для вставки информации в окно-->
-                <div class="modal-window__content-place" id="content-place"></div>
+                <div class="modal-window__content-place" id="content-place">
+
+                </div>
             </div>
         </div>
     </div>
